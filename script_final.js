@@ -76,10 +76,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const homeSection = document.getElementById('home');
 
     window.addEventListener('scroll', () => {
+        // Show the button when the user scrolls past the top of the home section
         if (window.scrollY > (homeSection?.offsetHeight || 300) * 0.7) {
-            scrollToHomeBtn.style.display = 'block';
+            scrollToHomeBtn.style.display = 'flex'; // Use 'flex' to make it visible
         } else {
-            scrollToHomeBtn.style.display = 'none';
+            scrollToHomeBtn.style.display = 'none'; // Hide the button
         }
     });
 
@@ -89,46 +90,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Function to type and then delete text for continuous loop
-    function typeDeleteLoop(element, text, typingSpeed = 70, deletingSpeed = 50, delayBetween = 1500) {
-        let i = 0;
-        let isDeleting = false;
-
-        function loop() {
-            if (isDeleting) {
-                // Deleting
-                if (element.textContent.length > 0) {
-                    element.textContent = element.textContent.substring(0, element.textContent.length - 1);
-                    setTimeout(loop, deletingSpeed);
-                } else {
-                    isDeleting = false;
-                    i = 0;
-                    setTimeout(loop, delayBetween); // Pause before re-typing
-                }
-            } else {
-                // Typing
-                if (i < text.length) {
-                    element.textContent += text.charAt(i);
-                    i++;
-                    setTimeout(loop, typingSpeed);
-                } else {
-                    isDeleting = true;
-                    setTimeout(loop, delayBetween); // Pause before deleting
-                }
-            }
-        }
-        loop(); // Start the loop
-    }
-
     // Clear initial content to prevent shifting
-    if (nameElement) nameElement.textContent = '';
-    if (roleInterestElement) roleInterestElement.innerHTML = '';
-
-    // Start name animation (loop)
-    if (nameElement) typeDeleteLoop(nameElement, nameText);
-
-    // Start improved bio animation (once, with color support)
-    if (roleInterestElement) typeWriterBio(roleInterestElement, roleInterestParts);
+    if (nameElement) {
+        nameElement.textContent = '';
+        typeWriter(nameElement, nameText);
+    }
+    if (roleInterestElement) {
+        roleInterestElement.innerHTML = '';
+        typeWriterBio(roleInterestElement, roleInterestParts);
+    }
 
     // WhatsApp send message functionality
     const sendBtn = document.getElementById('sendMessageBtn');
@@ -170,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Responsive Navbar Logic
+    // Responsive Navbar Dropdown Logic
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const navbarMenu = document.getElementById('navbar-menu');
 
@@ -182,7 +152,8 @@ document.addEventListener('DOMContentLoaded', () => {
     navbarMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             navbarMenu.classList.add('-translate-x-full');
-        });
+        }
+        );
     });
 
     // Intersection Observer for scroll animations
