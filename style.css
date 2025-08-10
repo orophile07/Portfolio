@@ -1,6 +1,103 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 /* Custom scroll-behavior for smooth scrolling */
 html {
     scroll-behavior: smooth;
+    /* This rule prevents horizontal scrolling on all screen sizes */
+    overflow-x: hidden;
+}
+
+/* Scroll to home button styling */
+#scrollToHomeBtn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+}
+
+#scrollToHomeBtn i {
+    font-size: 20px;
+}
+
+/* Up-down animation for scroll button */
+@keyframes float-up-down {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+.scroll-btn-animate {
+    animation: float-up-down 2s ease-in-out infinite;
+}
+
+/* Responsive positioning and sizing for scroll button on small screens */
+@media (max-width: 768px) {
+
+    #navbar-menu a:hover,
+    #navbar-menu a:focus {
+        color: #34d399;
+        /* Text color change on hover/tap */
+        /* You can add a subtle glow effect if desired, for example: */
+        box-shadow: 0 0 10px rgba(52, 211, 153, 0.4);
+    }
+
+    #scrollToHomeBtn {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+
+    #scrollToHomeBtn i {
+        font-size: 18px;
+    }
+
+    @keyframes float-up-down {
+        50% {
+            transform: translateY(-4px);
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    #scrollToHomeBtn {
+        bottom: 15px;
+        right: 15px;
+        width: 48px;
+        height: 48px;
+    }
+
+    #scrollToHomeBtn i {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 360px) {
+    #scrollToHomeBtn {
+        bottom: 12px;
+        right: 12px;
+        width: 44px;
+        height: 44px;
+    }
+
+    #scrollToHomeBtn i {
+        font-size: 15px;
+    }
 }
 
 body {
@@ -27,8 +124,6 @@ body {
     box-sizing: border-box;
     /* Include padding in width calculation */
 }
-
-/* ...existing code... */
 
 .home-section {
     min-height: 100vh;
@@ -190,7 +285,6 @@ body {
     box-shadow: 0 2px 8px 0 rgba(52, 211, 153, 0.08);
     background: transparent;
 }
-
 
 .home-btn.primary {
     background: #10b981;
